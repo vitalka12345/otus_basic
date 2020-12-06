@@ -1,4 +1,4 @@
-my_list = [1, "spam", True, ["lox", "pidor", "net_druzey"]]
+my_list = [1, "spam", True, ["foo", "bee", "baz"]]
 for i in my_list:
     print(i, "\n", end=" ",)
 
