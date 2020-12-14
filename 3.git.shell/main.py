@@ -13,6 +13,7 @@ def degree_func(income_list, income_degree=2):
 degree_func(random_list, random_degree)
 
 
+# Even, Odd, Prime function.
 operation_list = range(-5, 20)
 
 
