@@ -30,3 +30,16 @@ def degree_func(degree=2):
 
 
 degree_func(int(input("Enter wanted degree:")))
+
+# Failed degree function
+rand_list = [1, 2, 3, 4]
+rand_degree = 2
+
+
+def rand_degree_func(income_list, income_degree=4):
+    print(list(map(lambda dgr1: pow(dgr1, income_degree), income_list)))
+
+
+# rand_degree_func(rand_list, rand_degree)
+
+# TypeError: 'int' object is not callable

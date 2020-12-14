@@ -1,26 +1,46 @@
 # Degree function
-random_list = [1, 2, 3, 4]
+random_list = range(0, 20)
 random_degree = 2
 
 
-def degree_func(income_list, income_degree=4):
+def degree_func(income_list, income_degree=2):
     new_list = []
     for i in income_list:
         new_list.append(pow(i, income_degree))
-    print(new_list)
+    print('Degree list:', new_list)
 
 
-# degree_func(random_list, random_degree)
-
-# Failed degree function
-rand_list = [1, 2, 3, 4]
-rand_degree = 2
+degree_func(random_list, random_degree)
 
 
-def rand_degree_func(income_list, income_degree=4):
-    print(list(map(lambda dgr1: pow(dgr1, income_degree), income_list)))
+operation_list = range(-5, 20)
 
 
-rand_degree_func(rand_list, rand_degree)
+def even_odd_prime_numbers_function(list1, op_type=None):
+    if op_type is None:
+        op_type = str(input("You can choose one of 3 types (even, odd, prime):"))
+    else:
+        pass
+    count_elem = len(operation_list)
+    even_odd_prime_list = []
+    for n in range(count_elem):
+        if op_type == 'EVEN':
+            even_odd_prime_list = filter(lambda x: x % 2 == 0, operation_list)
+            returned_list = list(set(even_odd_prime_list))
+        elif op_type == 'ODD':
+            even_odd_prime_list = filter(lambda x: x % 2 == 1, operation_list)
+            returned_list = list(set(even_odd_prime_list))
+        elif op_type == 'PRIME':
+            even_odd_prime_list = filter(is_prime, operation_list)
+            returned_list = list(set(even_odd_prime_list))
+    print(f"{op_type} list:", returned_list)
 
-# TypeError: 'int' object is not callable
+
+def is_prime(n):
+    d = 2
+    while n % d != 0 and n > d:
+        d += 1
+    return d == n
+
+
+even_odd_prime_numbers_function(operation_list, 'PRIME')
