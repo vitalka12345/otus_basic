@@ -101,5 +101,4 @@ if __name__ == "__main__":
     even_odd_prime_numbers_function(operation_list, "PRIME")
     print("Demonstrate trace deco:")
     fib(4)
-    # print("Demonstrate time call deco pow func = ", pow_funk(123456789, 12345))
     print("Demonstrate time call deco, result pow function = ", format(pow_funk(123456789, 12345), ".1E"))
