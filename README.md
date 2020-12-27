@@ -1,8 +1,12 @@
 otus_basic
 ----------
-### Hello. My name is Vitaly K.
-This repository is for learning the Python language.
 
->After third lesson, my first homework is write function which get input list, and raise it to a degree.
+###Домашнее задание №1
 
->After that I need write function which can sort list on even, odd and prime numbers.
+>Написать функцию возвращающую список чисел возведенных в степень.
+
+>Написать функцию фильтрующую список и возвращающую четные, не четные, простые числа.
+
+>Написать декоратор для замера выполнении функции на примере возведения числа в степень.
+
+>Написать декоратор, который показывает вложенные входы в функцию. Применить на примере вычисления чисел Фибоначчи.
