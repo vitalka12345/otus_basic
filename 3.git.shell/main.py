@@ -24,7 +24,6 @@ def even_odd_prime_numbers_function(list1, op_type=None):
     else:
         pass
     count_elem = len(operation_list)
-    even_odd_prime_list = []
     for n in range(count_elem):
         if op_type == "EVEN":
             even_odd_prime_list = filter(lambda x: x % 2 == 0, operation_list)
