@@ -1,48 +1,45 @@
 from time import time
 from functools import wraps
 import decimal
-
-# Degree function
-random_list = range(0, 20)
-random_degree = 2
+from enum import Enum
 
 
-def degree_func(income_list, income_degree=2):
+def increase_degree(income_list, income_degree=2):
     new_list = []
     for i in income_list:
         new_list.append(pow(i, income_degree))
-    print(f"Degree {income_degree} list:", new_list)
+    return new_list
 
 
-# Even, Odd function
-operation_list = range(-5, 20)
+class OperationType(Enum):
+    EVEN = 1
+    ODD = 2
+    PRIME = 3
 
 
-def even_odd_prime_numbers_function(list1, op_type=None):
-    if op_type is None:
-        op_type = str(input("You can choose one of 3 types (even, odd, prime):"))
-    else:
-        pass
-    count_elem = len(operation_list)
-    for n in range(count_elem):
-        if op_type == "EVEN":
-            even_odd_prime_list = filter(lambda x: x % 2 == 0, operation_list)
-            returned_list = list(set(even_odd_prime_list))
-        elif op_type == "ODD":
-            even_odd_prime_list = filter(lambda x: x % 2 == 1, operation_list)
-            returned_list = list(set(even_odd_prime_list))
-        elif op_type == "PRIME":
-            even_odd_prime_list = filter(is_prime, operation_list)
-            returned_list = list(set(even_odd_prime_list))
-    print(f"{op_type} {operation_list.__repr__()} list:", returned_list)
+def filter_by_operation(input_list, operation):
+    output_list = []
+
+    for _ in input_list:
+        if operation == OperationType.EVEN:
+            even_odd_prime_list = filter(lambda x: x % 2 == 0, input_list)
+            output_list = list(set(even_odd_prime_list))
+        elif operation == OperationType.ODD:
+            even_odd_prime_list = filter(lambda x: x % 2 == 1, input_list)
+            output_list = list(set(even_odd_prime_list))
+        elif operation == OperationType.PRIME:
+            even_odd_prime_list = filter(is_prime, input_list)
+            output_list = list(set(even_odd_prime_list))
+        else:
+            print(f"Unknown type operation: {operation}")
+    return output_list
 
 
-# Prime function
-def is_prime(n):
-    d = 2
-    while n % d != 0 and n > d:
-        d += 1
-    return d == n
+def is_prime(num):
+    i = 2
+    while num % i != 0 and num > i:
+        i += 1
+    return i == num
 
 
 # Time call deco
@@ -60,28 +57,29 @@ def time_call(func):
 
 
 # Trace deco
-def trace(func1):
-    func1.level = 0
+def trace(func):
+    func.level = 0
 
-    @wraps(func1)
-    def wrapper1(*args, **kwargs):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
         args_str = ", ".join(map(repr, args))
         kwargs_str = ", ".join(map(lambda k, v: f"{k}={v!r}", kwargs.items()))
         func_args = list(filter(bool, (args_str, kwargs_str)))
-        print("___" * func1.level + f"-> {func1.__name__}({', '.join(func_args)})")
-        func1.level += 1
-        res = func1(*args, **kwargs)
-        func1.level -= 1
-        print("___" * func1.level + f"<- {func1.__name__}({', '.join(func_args)}) == {res}")
+        print("___" * func.level + f"-> {func.__name__}({', '.join(func_args)})")
+        func.level += 1
+        res = func(*args, **kwargs)
+        func.level -= 1
+        print("___" * func.level + f"<- {func.__name__}({', '.join(func_args)}) == {res}")
         return res
 
-    return wrapper1
+    return wrapper
 
 
+# Fibonacci function
 @trace
 def fib(pos):
     if pos < 0:
-        return None
+        return 0
     if pos < 2:
         return 1
     return fib(pos - 1) + fib(pos - 2)
@@ -94,10 +92,22 @@ def pow_funk(a, b):
 
 
 if __name__ == "__main__":
-    degree_func(random_list, random_degree)
-    even_odd_prime_numbers_function(operation_list, "ODD")
-    even_odd_prime_numbers_function(operation_list, "EVEN")
-    even_odd_prime_numbers_function(operation_list, "PRIME")
+    random_list = range(0, 20)
+    random_degree = 2
+    increase_degree_result = increase_degree(random_list, random_degree)
+    print(f"Degree {random_degree} list:", increase_degree_result)
+
+    operation_list = range(-5, 20)
+    odd_result = filter_by_operation(operation_list, OperationType.ODD)
+    print(f"ODD {operation_list.__repr__()} list:", odd_result)
+
+    even_result = filter_by_operation(operation_list, OperationType.EVEN)
+    print(f"EVEN {operation_list.__repr__()} list:", even_result)
+
+    prime_result = filter_by_operation(operation_list, OperationType.PRIME)
+    print(f"PRIME {operation_list.__repr__()} list:", prime_result)
+
     print("Demonstrate trace deco:")
     fib(4)
+
     print("Demonstrate time call deco, result pow function = ", format(pow_funk(123456789, 12345), ".1E"))
