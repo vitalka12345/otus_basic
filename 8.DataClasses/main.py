@@ -33,42 +33,20 @@
 присутствует главный модуль. при его запуске все новые объекты описываются, их методы выводятся - 1 балл
 Рекомендуем сдать до: 29.01.2021
 """
+from cars import Nine
+from planes import Tu154
+from ships import Titanik
 
 
-class BaseAuto:
-    type_model = None
+def main():
+    sport_car = Nine(80000, 69, 900, 500)
+    sport_plane = Tu154(120000, 75, 1100, 850)
+    sport_ship = Titanik(160000, 77, 1400, 1000)
 
-    def calling(self, name):
-        return print(f"Beep-Beep! {name}")
-
-    def __init__(self, price, power, weight, load_capacity):
-        self.price = price
-        self.power = power
-        self.weight = weight
-        self.load_capacity = load_capacity
-
-    def __str__(self):
-        return f'Цена: {self.price} Мощность: {self.power} Вес: {self.weight} Грузоподъемность: {self.load_capacity}'
-
-
-class Nine(BaseAuto):
-    type_model = 'Девятка'
-
-
-class Twelve(BaseAuto):
-    type_model = 'Двенажка'
-
-
-class Fourteen(BaseAuto):
-    type_model = 'Чепырка'
+    print(sport_car.type_model, sport_car)
+    print(sport_plane.type_model, sport_plane)
+    print(sport_ship.type_model, sport_ship)
 
 
 if __name__ == "__main__":
-    vaz2109 = Nine(80000, 69, 900, 500)
-    vaz2112 = Twelve(120000, 75, 1100, 850)
-    vaz2114 = Fourteen(160000, 77, 1400, 1000)
-
-    print(vaz2109.type_model, vaz2109)
-    print(vaz2112.calling(vaz2112.__class__.__name__))
-    print(vaz2112.type_model, vaz2112)
-    print(vaz2114.type_model, vaz2114)
+    main()
