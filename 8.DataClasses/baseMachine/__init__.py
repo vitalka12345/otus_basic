@@ -1,4 +1,8 @@
-class BaseMachine:
+from abc import ABC
+# TODO необходимо дописать использование ABC класса.
+
+
+class BaseMachine(ABC):
     type_model = None
 
     def calling(self, name):
