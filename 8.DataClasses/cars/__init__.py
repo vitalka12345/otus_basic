@@ -16,16 +16,18 @@ class Nine(Car):
     def start(self, fuel):
         if fuel > 10:
             print("Engine started!")
-            return True
         else:
-            print("Not enough fuel!")
-            return False
+            raise ValueError("Not enough fuel!", f"Fuel level is {fuel} liters!")
+
 
     def get_type_model(self, item):
         return item
 
     def riding(self, name, fuel=0):
-        if self.start(fuel=fuel):
-            print(f"{name} is a car and it goes.")
+        try:
+            self.start(fuel=fuel)
+        except ValueError as error:
+            for i in error.args:
+                print(i)
         else:
-            print(f"{name} Can't riding! Not enough fuel!")
+            print(f"{name} is a car and it goes! Fuel level {fuel} is good!")
