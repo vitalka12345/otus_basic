@@ -5,8 +5,8 @@ class Car(BaseMachine):
     type_model = 'Легковой автомобиль'
     wheel_count = 4
 
-    def riding(self, name, fuel):
-        return print(f"{name} is a car and it goes. Fuel level is {fuel} liters.")
+    def riding(self, name):
+        return print(f"{name} is a car and it goes.")
 
 
 class Nine(Car):
