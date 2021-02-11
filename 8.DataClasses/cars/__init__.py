@@ -24,8 +24,8 @@ class Nine(Car):
     def get_type_model(self, item):
         return item
 
-    def riding(self, name, fuel):
-        if self.start(fuel=fuel) == True:
+    def riding(self, name, fuel=0):
+        if self.start(fuel=fuel):
             print(f"{name} is a car and it goes.")
         else:
             print(f"{name} Can't riding! Not enough fuel!")
