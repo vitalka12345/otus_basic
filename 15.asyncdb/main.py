@@ -19,9 +19,9 @@ import requests
 def main():
     url = 'https://jsonplaceholder.typicode.com/users'
     response = requests.get(url=url)
-    print(response.request)
-    print(response.status_code)
-    print(response.text)
+    # print(response.request)
+    # print(response.status_code)
+    # print(response.text)
     print(response.json())
 
 
