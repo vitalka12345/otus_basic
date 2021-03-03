@@ -25,5 +25,5 @@ def main():
     print(response.json())
 
 
-if "__name__" == "__init__":
+if __name__ == "__main__":
     main()
