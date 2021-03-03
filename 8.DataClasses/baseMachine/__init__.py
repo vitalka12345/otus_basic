@@ -1,15 +1,15 @@
-from abc import ABC
-# TODO необходимо дописать использование ABC класса.
+from abc import ABC, abstractmethod
 
 
 class BaseMachine(ABC):
     type_model = None
 
     def calling(self, name):
-        return print(f"Beep-Beep! {name}")
+        return print(f"Beep-Beep! {self.__class__.__name__}")
 
-    def riding(self, name):
-        return print(f"{name} is riding!")
+    @abstractmethod
+    def moving(self, name):
+        return print(f"{self.__class__.__name__} is riding!")
 
     def __init__(self, price, power, weight, load_capacity):
         self.price = price

@@ -45,7 +45,7 @@ def main():
     sport_ship = Titanik(160000, 77, 1400, 1000)
 
     print(sport_car.type_model, sport_car)
-    sport_car.riding(sport_car.get_type_model(sport_car.type_model), 11)
+    sport_car.moving(sport_car.get_type_model(sport_car.type_model), 11)
     print(sport_plane.type_model, sport_plane)
     print(sport_ship.type_model, sport_ship)
 
