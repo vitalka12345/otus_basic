@@ -13,9 +13,16 @@
 # запись в базу данных выполняется в асинхронном виде - 1 балл
 # соединение с базой данных закрывается при завершении работы - 1 балл
 # Рекомендуем сдать до: 26.02.2021
+import requests
+
 
 def main():
-    pass
+    url = 'https://jsonplaceholder.typicode.com/users'
+    response = requests.get(url=url)
+    print(response.request)
+    print(response.status_code)
+    print(response.text)
+    print(response.json())
 
 
 if "__name__" == "__init__":
