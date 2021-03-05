@@ -1,7 +1,15 @@
 from baseMachine import BaseMachine
 
 
-class Titanik(BaseMachine):
+class Ship(BaseMachine):
+    type_model = 'Корабль'
+    displacement = 20000
+
+    def moving(self, name):
+        return print(f"{name} is a ship and it floated.")
+
+
+class Titanik(Ship):
     type_model = "Титаник"
     displacement = 45000
 
