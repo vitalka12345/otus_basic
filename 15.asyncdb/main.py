@@ -14,15 +14,15 @@
 # соединение с базой данных закрывается при завершении работы - 1 балл
 # Рекомендуем сдать до: 26.02.2021
 import requests
+import asyncio
 
 
 def main():
-    url = 'https://jsonplaceholder.typicode.com/users'
+    url = 'https://jsonplaceholder.typicode.com/posts'
     response = requests.get(url=url)
-    # print(response.request)
-    # print(response.status_code)
-    # print(response.text)
-    print(response.json())
+    for i in response.json():
+        # print(type(i))
+        print(i["id"], i["userId"], i["title"], i["body"])
 
 
 if __name__ == "__main__":
