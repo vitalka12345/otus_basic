@@ -13,8 +13,10 @@
 # запись в базу данных выполняется в асинхронном виде - 1 балл
 # соединение с базой данных закрывается при завершении работы - 1 балл
 # Рекомендуем сдать до: 26.02.2021
+#docker run -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_DB=my_db -p 5432:5432 postgres
 import requests
 import asyncio
+import postgresio
 
 
 def main():
