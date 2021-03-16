@@ -6,7 +6,7 @@
 # записать вытянутые модели в БД
 # скрипт для стягивания данных и записи в БД реализован в асинхронном виде
 # Критерии оценки: у моделей есть primary_key - 1 балл
-# runны все миграции - 1 балл
+# созданы все миграции - 1 балл
 # скрипт стягивает данные с API и складывает в БД - 1 балл
 # обращение к API выполняется в асинхронном виде - 1 балл
 # на асинхронный клиент применяется close при завершении работы - 1 балл
@@ -22,47 +22,7 @@ import aiohttp
 async def get_posts():
     async with aiohttp.ClientSession() as session:
         async with session.get('https://jsonplaceholder.typicode.com/posts') as response:
-            # print(await response.json())
             return await response.json()
-
-
-async def fetch_elem():
-    conn = await asyncpg.connect(
-        user='user',
-        password='password',
-        database='my_db',
-        host='127.0.0.1',
-    )
-    print(conn)
-    post = await conn.fetchrow(
-        """
-        SELECT * FROM public.posts
-        WHERE "userId" = $1;
-        """,
-        15,
-    )
-    print("post:", post)
-    await conn.close()
-
-
-async def insert_elem():
-    conn = await asyncpg.connect(
-        user='user',
-        password='password',
-        database='my_db',
-        host='127.0.0.1',
-    )
-    print(conn)
-    await conn.execute(
-        """
-        INSERT INTO public.posts("userId", title, body)
-        VALUES ($1, $2, $3);
-        """,
-        15,
-        'example title2',
-        'example body2',
-    )
-    await conn.close()
 
 
 async def run():
@@ -89,9 +49,4 @@ async def run():
 
 
 if __name__ == '__main__':
-    # asyncio.run(insert_elem())
-    # asyncio.run(fetch_elem())
     asyncio.run(run())
-    # loop = asyncio.get_event_loop()
-    # print(loop)
-    # loop.run_until_complete(run())
