@@ -19,36 +19,79 @@ import asyncpg
 import aiohttp
 
 
-async def run():
-
+async def get_posts():
     async with aiohttp.ClientSession() as session:
         async with session.get('https://jsonplaceholder.typicode.com/posts') as response:
-            print(await response.json())
-            conn = await asyncpg.connect(
-                user='user',
-                password='password',
-                database='my_db',
-                host='0.0.0.0',
-            )
-            print(conn)
+            # print(await response.json())
+            return await response.json()
 
-            for i in await response.json():
-                print("id: ", i["id"], "userId: ", i["userId"], "title: ", i["title"],
-                      "body: ", i["body"])
-                await conn.execute(
-                    """
-                    INSERT INTO posts(userId, title, body)
-                    VALUES ($1, $2, $3);
-                    """,
-                    {i["userId"]},
-                    {i["title"]},
-                    {i["body"]},
-                )
-            await conn.close()
+
+async def fetch_elem():
+    conn = await asyncpg.connect(
+        user='user',
+        password='password',
+        database='my_db',
+        host='127.0.0.1',
+    )
+    print(conn)
+    post = await conn.fetchrow(
+        """
+        SELECT * FROM public.posts
+        WHERE "userId" = $1;
+        """,
+        15,
+    )
+    print("post:", post)
+    await conn.close()
+
+
+async def insert_elem():
+    conn = await asyncpg.connect(
+        user='user',
+        password='password',
+        database='my_db',
+        host='127.0.0.1',
+    )
+    print(conn)
+    await conn.execute(
+        """
+        INSERT INTO public.posts("userId", title, body)
+        VALUES ($1, $2, $3);
+        """,
+        15,
+        'example title2',
+        'example body2',
+    )
+    await conn.close()
+
+
+async def run():
+    conn = await asyncpg.connect(
+        user='user',
+        password='password',
+        database='my_db',
+        host='127.0.0.1',
+    )
+
+    for i in await get_posts():
+        print("id: ", i["id"], "userId: ", i["userId"], "title: ", str(i["title"]),
+              "body: ", str(i["body"]))
+        await conn.execute(
+            """
+            INSERT INTO public.posts("userId", title, body)
+            VALUES ($1, $2, $3);
+            """,
+            i["userId"],
+            i["title"],
+            i["body"],
+        )
+    await conn.close()
 
 
 if __name__ == '__main__':
+    # asyncio.run(insert_elem())
+    # asyncio.run(fetch_elem())
     asyncio.run(run())
-    loop = asyncio.get_event_loop()
-    print(loop)
-    loop.run_until_complete(run())
+    # loop = asyncio.get_event_loop()
+    # print(loop)
+    # loop.run_until_complete(run())
