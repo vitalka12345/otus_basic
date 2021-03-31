@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  pg:
+    image: "postgres" # use latest official postgres version
+    build: .
+    ports:
+      - 5432:5432
+#    volumes:
+#      - .:/code # persist data even if container shuts down
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: my_db
